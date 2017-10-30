@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Quotes Dashboard</title>
+    </head>
+    <body>
+        <h1>Hello, {{ request.session.user.name }}!!</h1>
+
+        <fieldset>
+            <legend>Add A Quote</legend>
+        <form action="/process" method="post">
+        {% csrf_token %}
+        <label for="author">Quoted By:</label>
+        <input type="text" name="author" placeholder="author">
+
+        <label for="message">Message:</label>
+        <input type="text" name="message" placeholder="message">
+
+        <input type="submit" value="Add">
+    </form>
+    </fieldset>
+    {% for all in all_quotes %}
+    <fieldset>
+        <legend>Quotable Quotes</legend>
+        <p>Author: {{ all.author }}</p>
+        <p>Quote: {{ all.message }}</p>
+        <p>Uploaded By:<a href="/uploader/{{ all.uploader_id }}">{{ all.uploader.name }}</a></p>
+        <button><a href="/favorites/{{ all.id }}">Add To Favorites</a></button>
+    </fieldset>
+    {% endfor %}
+ {% for fave in faves %}
+    <fieldset>
+        <legend>**Favorites**</legend>
+   
+        <p>Author: {{ fave.author }}</p>
+        <p>Quote: {{ fave.message }}</p>
+        <p>Uploaded By:<a href="/uploader/{{ fave.uploader_id }}">{{ fave.uploader.name }}</a></p>
+        <button><a href="/remove/{{ fave.id }}">Remove</a></button>
+    </fieldset>
+    {% endfor %}    
+
+    <a href="/session/delete"><button>Logout</button></a>
+    </body>
+</html>

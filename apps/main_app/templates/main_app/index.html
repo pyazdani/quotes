@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index</title>
+</head>
+<body>
+
+<h3>Registration</h3>
+<form action="/users/new" method="post">
+	{% csrf_token %}
+	<label for="name">Name:</label>
+	<input type="text" name="name" placeholder="name">
+	<label for="uname">Alias/Email:</label>
+	<input type="text" name="username" placeholder="username">
+	<label for="pass">Password:</label>
+	<input type="password" name="password" placeholder="password">
+	<label for="pass">Confirm Password:</label>
+	<input type="password" name="confirm" placeholder="confirm password">
+	<label for="dob">Date of Birth:</label>
+	<input type="date" name="dob">
+	<input type="submit" value="Register">
+
+</form>
+
+<h3>Login</h3>
+
+<form action="/session/new" method="post">
+	{% csrf_token %}
+	<label for="uname">Username:</label>
+	<input type="text" name="username" placeholder="username">
+	<label for="pass">Password:</label>
+	<input type="password" name="password" placeholder="password">
+	<input type="submit" value="Login">
+</form>
+<a href="/session/delete"><button>Logout</button></a>
+{% if messages %}
+	{% for message in messages %}
+			<p>{{ message }}</p>		
+	{% endfor %}
+{% endif %}
+</body>
+</html>

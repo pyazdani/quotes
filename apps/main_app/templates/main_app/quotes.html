@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quote/User</title>
+</head>
+
+<body>
+    <h3>Total Submitted by User: {{ count }}</h3>
+    {{ uploader }}
+	{% for quote in quotes %}
+    <fieldset>
+        <legend>{{ quote.uploader.name }}</legend>
+        <p>Quote Author: {{ quote.author }}</p>
+        <p>Message: {{ quote.message }}</p>
+    </fieldset>
+     {% endfor %}
+           
+</body>
+<a href="/session/dashboard"><button>Main QQ Page</button></a>
+<a href="/session/delete"><button>Logout</button></a>
+</html>
